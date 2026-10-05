@@ -9,7 +9,8 @@ namespace PSR.Api.Endpoints.Analysis
             app.MapPost("/api/analysis", async
                 (HttpClient httpclient,
                 AnalysisRequest request) =>
-            {
+            {   
+                // returned value of this variable is HttpResponseMessage
                 var response = await httpclient.PostAsJsonAsync(
                     "http://127.0.0.1:8000/analyze",
                     request
