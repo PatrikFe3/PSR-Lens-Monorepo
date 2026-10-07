@@ -1,7 +1,18 @@
 import { Component } from '@angular/core';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatListModule} from '@angular/material/list';
+import { RouterLink, RouterOutlet } from '@angular/router';
+import { MatButtonToggle, MatButtonToggleGroup } from '@angular/material/button-toggle';
 
 @Component({
-  imports: [],
+  imports: [
+    MatSidenavModule,
+    MatListModule,
+    RouterLink,
+    RouterOutlet,
+    MatButtonToggle,
+    MatButtonToggleGroup
+],
   selector: 'app-side-nav',
   styleUrl: './side-nav.scss',
   templateUrl: './side-nav.html',

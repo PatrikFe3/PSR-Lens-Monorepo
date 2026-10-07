@@ -14,7 +14,6 @@ export interface AnalysisResponse {
 @Service()
 export class AnalysisService {
     private http = inject(HttpClient);
-
     private apiUrl = 'http://localhost:5104/api';
 
     analyze(request: AnalysisRequest) {
