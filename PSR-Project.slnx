@@ -3,4 +3,5 @@
   <Project Path="backend/PSR.Application/PSR.Application.csproj" Id="010482ef-b8c2-426d-be50-5559587bbdce" />
   <Project Path="backend/PSR.Domain/PSR.Domain.csproj" Id="b9fc502c-922c-4eb4-89e3-e78e5364be36" />
   <Project Path="backend/PSR.Infrastructure/PSR.Infrastructure.csproj" Id="1e58c42b-fea7-46d9-893a-3e084a22e66c" />
+  <Project Path="e2e-tests/e2e-tests.csproj" />
 </Solution>
