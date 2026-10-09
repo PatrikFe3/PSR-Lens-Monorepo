@@ -1,9 +1,14 @@
 import { Component, inject } from '@angular/core';
 import { AnalysisInput } from '../../components/analysis-input/analysis-input';
 import { AnalysisService } from '../../services/analysis-service';
+import { Navbar } from '../../components/navbar/navbar';
 
 @Component({
-  imports: [AnalysisInput],
+  imports: 
+  [
+    AnalysisInput, 
+    Navbar
+  ],
   selector: 'app-analysis',
   styleUrl: './analysis.scss',
   templateUrl: './analysis.html',
