@@ -1,17 +1,39 @@
 .example-container {
-  height: 100vh;
+    height: 100vh;
 }
 
 mat-drawer {
     width: 250px;
-    background-color: rgb(143, 101, 143);
+    background-color: var(--psr-sidebar);
+    color: var(--psr-text);
 }
 
 mat-drawer-content {
     height: 100%;
-    background-color: rgb(233, 187, 233);
+    background: var(--psr-gradient);
+    background-size: 200% 200%;
+    background-position: 0% 50%;
+    animation: psr-gradient-shift 24s ease-in-out infinite alternate;
+    color: var(--psr-text);
 }
 
 mat-nav-list a {
-    color: aliceblue;
+    color: inherit;
+}
+
+@keyframes psr-gradient-shift {
+  from {
+    background-position: 0% 50%;
+  }
+
+  to {
+    background-position: 100% 50%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  mat-drawer-content {
+    animation: none;
+    background-position: 50% 50%;
+  }
 }

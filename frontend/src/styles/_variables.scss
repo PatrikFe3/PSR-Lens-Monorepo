@@ -1,0 +1,29 @@
+html.light-theme {
+    --psr-gradient: linear-gradient(180deg, #d7c5f1 65%, #b3b5d2 100%, #a4e0d9 0%, #e6e891 35%);
+
+    --psr-background: #e0ccf7;
+    --psr-surface: #ffffff;
+    --psr-text: #18181b;
+    --psr-text-muted: #71717a;
+    --psr-border: #e4e4e7;
+    --psr-sidebar: #c19ee9;
+
+    --psr-risk-low: #16a34a;
+    --psr-risk-medium: #d97706;
+    --psr-risk-high: #dc2626;
+}
+
+html.dark-theme {
+    --psr-gradient: linear-gradient(180deg, #2e1542 65%, #2a0c35 100%, #3e1425 0%, #061943 35%);
+
+    --psr-background: #2b143e;
+    --psr-surface: #18181b;
+    --psr-text: #fafafa;
+    --psr-text-muted: #a692b0;
+    --psr-border: #3f3f46;
+    --psr-sidebar: #1a0829;
+
+    --psr-risk-low: #4ade80;
+    --psr-risk-medium: #fbbf24;
+    --psr-risk-high: #f87171;
+}
