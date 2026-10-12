@@ -15,12 +15,13 @@
                 <span matListItemTitle>Settings</span>
             </a>
         </mat-nav-list>
-        <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+        <mat-button-toggle-group name="fontStyle" aria-label="Color theme" [value]="colorTheme.theme()"
+            (change)="onThemeChange($event.value)">
 
-            <mat-button-toggle value="light" aria-label="Light Mode"><mat-icon matListItemIcon
+            <mat-button-toggle value="light-theme" aria-label="Light Mode"><mat-icon matListItemIcon
                     aria-hidden="true">light_mode</mat-icon>Light</mat-button-toggle>
 
-            <mat-button-toggle value="dark" aria-label="Dark Mode"><mat-icon matListItemIcon
+            <mat-button-toggle value="dark-theme" aria-label="Dark Mode"><mat-icon matListItemIcon
                     aria-hidden="true">dark_mode</mat-icon>Dark</mat-button-toggle>
 
         </mat-button-toggle-group>

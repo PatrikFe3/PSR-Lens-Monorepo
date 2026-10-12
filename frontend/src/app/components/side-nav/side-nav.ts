@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { MatButtonToggle, MatButtonToggleGroup } from '@angular/material/button-toggle';
 import { MatIconModule } from '@angular/material/icon';
+import { ColorTheme, ThemeColor } from '../../services/color-theme';
 
 @Component({
   imports: [
@@ -19,4 +20,12 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrl: './side-nav.scss',
   templateUrl: './side-nav.html',
 })
-export class SideNav {}
+export class SideNav {
+  readonly colorTheme = inject(ColorTheme);
+
+  onThemeChange(value: ThemeColor | null): void {
+    if (value != null) {
+      this.colorTheme.setTheme(value);
+    }
+  }
+}
