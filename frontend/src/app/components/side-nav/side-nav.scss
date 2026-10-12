@@ -11,29 +11,9 @@ mat-drawer {
 mat-drawer-content {
     height: 100%;
     background: var(--psr-gradient);
-    background-size: 200% 200%;
-    background-position: 0% 50%;
-    animation: psr-gradient-shift 24s ease-in-out infinite alternate;
     color: var(--psr-text);
 }
 
 mat-nav-list a {
     color: inherit;
-}
-
-@keyframes psr-gradient-shift {
-  from {
-    background-position: 0% 50%;
-  }
-
-  to {
-    background-position: 100% 50%;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  mat-drawer-content {
-    animation: none;
-    background-position: 50% 50%;
-  }
 }
