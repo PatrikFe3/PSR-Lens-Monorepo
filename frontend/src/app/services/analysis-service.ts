@@ -1,5 +1,6 @@
 import { Service, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { AnalysisResultsMock } from '../models/analysis-results-mock';
 
 export interface AnalysisRequest {
     text: string;
@@ -22,4 +23,8 @@ export class AnalysisService {
             request
         )
     }
+
+    AnalysisResultsMock = [
+        
+    ]
 }
