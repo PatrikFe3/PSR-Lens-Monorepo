@@ -1,4 +1,36 @@
+.cardBody {
+    background-color: white;
+    display: block;
+    height: 600px;
+    width: 500px;
+}
+
 .cardHeader {
-    background: var(--psr-sidebar);
-    color: var(--psr-text);
+    background: var(--psr-analysis-header);
+}
+
+.resultsContainer {
+    background: var(--psr-risk-low);
+    color: var(--psr-risk-text-pass);
+    border-radius: 0.5rem;
+}
+
+.analysisSummary {
+    background: var(--psr-analysis-summary-div);
+    border-radius: 0.5rem;
+    color: black;
+}
+
+.cardTitles {
+    color: black;
+}
+
+.detectedIndicators {
+    background: var(--psr-risk-low);
+    color: black;
+    border-radius: 0.5rem;
+}
+
+.detectedIndicators mat-list-item {
+  --mat-list-list-item-label-text-color: black;
 }

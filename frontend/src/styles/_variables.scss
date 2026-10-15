@@ -23,7 +23,13 @@ html.dark-theme {
     --psr-border: #3f3f46;
     --psr-sidebar: #1a0829;
 
-    --psr-risk-low: #4ade80;
+    --psr-analysis-header: #6750A4;
+    --psr-analysis-summary-div: #CBBBE5;
+
+    --psr-risk-low: #AAEC9D;
+    --psr-risk-text-pass: #27551A;
     --psr-risk-medium: #fbbf24;
+    --psr-risk-text-warning: #656437;
     --psr-risk-high: #f87171;
+    --psr-risk-text-error: #6B2A2A;
 }

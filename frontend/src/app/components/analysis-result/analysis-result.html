@@ -6,7 +6,7 @@
         </mat-card-subtitle>
     </mat-card-header>
 
-    <mat-card-content>
+    <mat-card-content class="cardTitles">
         <div class="resultsContainer">
             <mat-icon>bug_report</mat-icon>
             <span>High Risk</span>
@@ -25,15 +25,15 @@
         <h3><mat-icon aria-hidden="true">list</mat-icon>Detected Indicators:</h3>
         <div class="detectedIndicators">
             <mat-list>
-                <mat-list-item>First element</mat-list-item>
-                <mat-list-item>Second element</mat-list-item>
-                <mat-list-item>Third element</mat-list-item>
+                <mat-list-item><mat-icon aria-hidden="true">warning</mat-icon>First element</mat-list-item>
+                <mat-list-item><mat-icon aria-hidden="true">link</mat-icon>Second element</mat-list-item>
+                <mat-list-item><mat-icon aria-hidden="true">mail</mat-icon>Third element</mat-list-item>
             </mat-list>
         </div>
-        <button matButton>
+        <button matButton="elevated" class="analysisResulBTN">
             View Details
         </button>
-        <button matButton>
+        <button matButton="elevated" class="analysisResulBTN">
             Close
         </button>
     </mat-card-content>
