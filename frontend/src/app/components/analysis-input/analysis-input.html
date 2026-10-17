@@ -1,8 +1,8 @@
 <div class="main-Input">
-    <mat-form-field>
+    <mat-form-field class="messageField" appearance="outline">
         <mat-label>Paste your Message</mat-label>
-        <textarea matInput [(ngModel)]="emailContent"></textarea>
+        <textarea matInput [(ngModel)]="emailContent" rows="8"></textarea>
     </mat-form-field>
     
-    <button matButton (click)="onAnalyze()">Analyze</button>
+    <button matButton="filled" (click)="onAnalyze()" class="analyzeBtn">Analyze</button>
 </div>

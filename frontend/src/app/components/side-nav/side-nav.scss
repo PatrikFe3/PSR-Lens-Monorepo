@@ -2,10 +2,15 @@
     height: 100vh;
 }
 
+.matDrawerWrapper {
+    margin: 1rem;
+}
+
 mat-drawer {
     width: 250px;
     background-color: var(--psr-sidebar);
     color: var(--psr-text);
+    border-radius: 0;
 }
 
 mat-drawer-content {
