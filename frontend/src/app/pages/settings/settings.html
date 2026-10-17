@@ -1,1 +1,53 @@
-<p>settings works!</p>
+<div class="settingsPageWrapper">
+    <mat-drawer-container class="example-container">
+
+        <mat-drawer mode="side" opened>
+            <div class="drawerContentHeader">
+                <h1>Settings</h1>
+            </div>
+            <div class="matDrawerWrapper">
+                <mat-nav-list>
+                    <a mat-list-item routerLink="/analysis">
+                        <mat-icon matListItemIcon aria-hidden="true">add_box</mat-icon>
+                        <span matListItemTitle>Theme</span>
+                    </a>
+                    <a mat-list-item routerLink="/about">
+                        <mat-icon matListItemIcon aria-hidden="true">info</mat-icon>
+                        <span matListItemTitle>Language</span>
+                    </a>
+                    <a mat-list-item routerLink="/settings">
+                        <mat-icon matListItemIcon aria-hidden="true">settings</mat-icon>
+                        <span matListItemTitle>General</span>
+                    </a>
+                </mat-nav-list>
+            </div>
+        </mat-drawer>
+
+        <mat-drawer-content>
+            <div class="drawerContentHeader">
+                <h1>Theme</h1>    
+            </div>
+            <div class="colorThemeSection">
+                <h4>Color Theme-select</h4>
+                <mat-form-field>
+                    <mat-label>Select Color</mat-label>
+
+                    <mat-select>
+                        @for (theme of colorThemeData; track theme) {
+                        <mat-option [value]="theme.name">{{theme.id}}</mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            
+            <div class="analysisActions">
+                <button matButton="elevated" class="analysisResulBTN">
+                    Save
+                </button>
+                <button matButton="outlined" class="analysisResulBTN">
+                    Cancel
+                </button>
+            </div>
+        </mat-drawer-content>
+    </mat-drawer-container>
+</div>

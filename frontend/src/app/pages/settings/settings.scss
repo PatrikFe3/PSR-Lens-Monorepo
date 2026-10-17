@@ -1,0 +1,31 @@
+.settingsPageWrapper {
+    padding: 2rem 0 0 0;
+    display: flex;
+    justify-content: center;
+    min-width: 600px;
+    height: 600px;
+}
+
+.example-container {
+    border-radius: 1rem;
+}
+
+.drawerContentHeader {
+    background: var(--psr-analysis-header);
+}
+
+mat-drawer {
+    padding: 1rem;
+}
+
+mat-drawer-content {
+    padding: 1rem;
+    display: flex;
+}
+
+.analysisActions {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    gap: 1rem;
+}
