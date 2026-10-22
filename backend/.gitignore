@@ -1,0 +1,17 @@
+# Python & Conda
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+env/
+venv/
+
+# PyCharm nastavenia
+.idea/
+
+# Environment variables
+.env
+
+# Iné
+.DS_Store
+*.log

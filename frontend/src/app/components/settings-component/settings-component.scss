@@ -1,0 +1,87 @@
+.settingsPageWrapper {
+    padding: 2rem 1rem 1rem;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    min-width: 0px;
+    min-height: 700px;
+    box-sizing: border-box;
+}
+
+.example-container {
+    border-radius: 1rem;
+    width: 100%;
+    max-width: 1100%;
+    min-width: 0;
+}
+
+.drawerContentHeader {
+    padding: 1rem;
+}
+
+.drawerContentHeader h1 {
+    margin: 0;
+}
+
+mat-drawer {
+    padding: 1rem;
+    width: 220px;
+    box-sizing: border-box;
+}
+
+mat-drawer-content {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    gap: 2rem;
+}
+
+.analysisActions {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.settingsContent {
+    flex: 1;
+    min-width: 0;
+}
+
+.colorThemeSection {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+}
+
+.colorThemeSection mat-form-field {
+    width: 100%;
+    max-width: 320px;
+}
+
+mat-nav-list button.active {
+    background: var(--psr-analysis-header);
+    border-radius: 0.5rem;
+}
+
+@media (max-width: 700px) {
+    .settingsPageWrapper {
+        padding: 1rem 0.5rem; 
+    }
+
+    mat-drawer {
+        width: 160px; 
+        padding: 0.5rem;
+    }
+
+    mat-drawer-content {
+        padding: 0.75rem;
+    }
+
+    .analysisActions {
+        flex-wrap: wrap; 
+    }
+}

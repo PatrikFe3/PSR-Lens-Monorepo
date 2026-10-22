@@ -1,6 +1,0 @@
-@PSR.Api_HostAddress = http://localhost:5104
-
-GET {{PSR.Api_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
