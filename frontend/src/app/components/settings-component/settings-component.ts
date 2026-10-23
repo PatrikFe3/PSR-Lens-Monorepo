@@ -8,6 +8,7 @@ import { MatSelect } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { Languages, languageName } from '../../models/languages';
 
 type SettingsSection = 'theme' | 'language' | 'general';
 
@@ -41,7 +42,20 @@ export class SettingsComponent {
 
     return titles[this.selectedSection];
   }
-
+  
+  langName: languageName = 'English';
+  languageOptions: Languages[] = [
+    {
+      name: 'English',
+    },
+    {
+      name: 'Czech',
+    },
+    {
+      name: 'Slovak'
+    }
+  ];
+  
   colorId: ColorThemeId = 'autumn';
   colorThemeData: ColorThemeMock[] = [
     {

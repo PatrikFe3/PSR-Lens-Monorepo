@@ -13,10 +13,12 @@
     width: 100%;
     max-width: 1100%;
     min-width: 0;
+    background: var(--psr-analysis-header);
 }
 
 .drawerContentHeader {
     padding: 1rem;
+    color: var(--psr-text);
 }
 
 .drawerContentHeader h1 {
@@ -27,6 +29,7 @@ mat-drawer {
     padding: 1rem;
     width: 220px;
     box-sizing: border-box;
+    background: var(--psr-sidebar);
 }
 
 mat-drawer-content {
