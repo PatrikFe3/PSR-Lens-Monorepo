@@ -7,20 +7,17 @@
             </div>
             <div class="matDrawerWrapper">
                 <mat-nav-list>
-                    <a mat-list-item type="button"
-                        [class.active]="selectedSection === 'theme'"
+                    <a mat-list-item type="button" [class.active]="selectedSection === 'theme'"
                         (click)="selectedSection = 'theme'">
                         <mat-icon matListItemIcon aria-hidden="true">palette</mat-icon>
                         <span matListItemTitle>Theme</span>
                     </a>
-                    <a mat-list-item type="button"
-                        [class.active]="selectedSection === 'language'"
+                    <a mat-list-item type="button" [class.active]="selectedSection === 'language'"
                         (click)="selectedSection = 'language'">
                         <mat-icon matListItemIcon aria-hidden="true">language</mat-icon>
                         <span matListItemTitle>Language</span>
                     </a>
-                    <a mat-list-item type="button"
-                        [class.active]="selectedSection === 'general'"
+                    <a mat-list-item type="button" [class.active]="selectedSection === 'general'"
                         (click)="selectedSection = 'general'">
                         <mat-icon matListItemIcon aria-hidden="true">settings</mat-icon>
                         <span matListItemTitle>General</span>
@@ -36,44 +33,50 @@
 
             <main class="settingsContent">
                 @switch (selectedSection) {
-                    @case ('theme') {
-                        <section class="colorThemeSection">
-                            <h4>Color theme</h4>
+                @case ('theme') {
+                <section class="colorThemeSection">
+                    <h4>Color theme</h4>
 
-                            <mat-form-field appearance="outline">
-                                <mat-label>Select color</mat-label>
-                                <mat-select
-                                    [value]="colorId"
-                                    (selectionChange)="colorId = $event.value">
-                                    @for (theme of colorThemeData; track theme.id) {
-                                        <mat-option [value]="theme.id">
-                                            {{ theme.name }}
-                                        </mat-option>
-                                    }
-                                </mat-select>
-                            </mat-form-field>
-                        </section>
-                    }
+                    <mat-form-field appearance="outline">
+                        <mat-label>Select color</mat-label>
+                        <mat-select [value]="colorId" (selectionChange)="colorId = $event.value">
+                            @for (theme of colorThemeData; track theme.id) {
+                            <mat-option [value]="theme.id">
+                                {{ theme.name }}
+                            </mat-option>
+                            }
+                        </mat-select>
+                    </mat-form-field>
+                </section>
+                }
 
-                    @case ('language') {
-                        <section>
-                            <h4>Language settings</h4>
-                            <p>Language options will be added here.</p>
+                @case ('language') {
+                <section>
+                    <h4>Language settings</h4>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Select Language</mat-label>
+                        <mat-select [value]="langName" (selectionChange)="langName = $event.value">
+                            @for (option of languageOptions; track langName) {
+                            <mat-option [value]="langName">
+                                {{ option.name }}
+                            </mat-option>
+                            }
+                        </mat-select>
+                    </mat-form-field>
+                </section>
+                }
 
-                        </section>
-                    }
-                        
-                    @case ('general') {
-                        <section class="generalSettingsContent">
-                            <h4>General settings</h4>
-                            <p><mat-slide-toggle labelPosition="before">Show animations</mat-slide-toggle></p>
-                            <p><mat-slide-toggle labelPosition="before">Alarm off/on</mat-slide-toggle></p>
-                            <p><mat-slide-toggle labelPosition="before">Application sounds</mat-slide-toggle></p>
-                        </section>
-                    }
+                @case ('general') {
+                <section class="generalSettingsContent">
+                    <h4>General settings</h4>
+                    <p><mat-slide-toggle labelPosition="before">Show animations</mat-slide-toggle></p>
+                    <p><mat-slide-toggle labelPosition="before">Alarm off/on</mat-slide-toggle></p>
+                    <p><mat-slide-toggle labelPosition="before">Application sounds</mat-slide-toggle></p>
+                </section>
+                }
                 }
             </main>
-            
+
             <div class="analysisActions">
                 <button matButton="outlined" class="analysisResulBTN">
                     Save
