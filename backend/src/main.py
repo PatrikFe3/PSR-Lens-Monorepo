@@ -1,12 +1,30 @@
+import cadquery as cq
+
+from src.geometry.generators.brick_generator import generate_brick
+from src.config.paths import MODELS_DIR
+
 from src.geometry.generators.beam_generator import generate_beam
 from src.printers.printer_profile import (
     PrinterProfile,
     validate_model_fits,
 )
-from src.geometry.model_builder import build_ribbed_cylinder
-
+from src.geometry.model_builder import ModelBuilder
+from src.services.brick_collection_service import generate_brick_collection
+from src.services.build_plate_service import generate_build_plate
 
 def main() -> None:
+
+    generate_build_plate(
+        plate_width=250,
+        plate_depth=250,
+        spacing=3.0,
+    )
+
+    generated_files = generate_brick_collection()
+
+    print("\nCollection generation completed!")
+    print(f"Generated {len(generated_files)} models.")
+
     printer = PrinterProfile(
         name="Creality Ender 6",
         build_volume_x=250.0,
@@ -74,7 +92,7 @@ def main() -> None:
 
                 taper_amount = taper_percent / 100.0
 
-            build_ribbed_cylinder(
+            ModelBuilder.build_ribbed_cylinder(
                 radius=radius,
                 height=height,
                 rib_count=12,

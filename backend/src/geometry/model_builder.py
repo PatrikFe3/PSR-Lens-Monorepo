@@ -2,6 +2,8 @@ import cadquery as cq
 from typing import Optional
 from src.config.paths import MODELS_DIR
 from src.geometry.deformers.taper import apply_taper_deformer
+from src.geometry.transformations.translate import translate_model
+from src.geometry.transformations.rotate import rotate_model
 from src.geometry.operations import (
     create_cylinder,
     add_circular_ribs,
@@ -56,6 +58,41 @@ class ModelBuilder:
             raise ValueError("Cannot build an empty model.")
 
         return self._model
+
+    def translate(
+            self,
+            x: float = 0.0,
+            y: float = 0.0,
+            z: float = 0.0,
+    ) -> "ModelBuilder":
+        if self._model is None:
+            raise ValueError("Cannot translate an empty model.")
+
+        self._model = translate_model(
+            model=self._model,
+            x=x,
+            y=y,
+            z=z,
+        )
+        return self
+
+    def rotate(
+            self,
+            axis_start: tuple[float, float, float],
+            axis_end: tuple[float, float, float],
+            angle: float,
+    ) -> "ModelBuilder":
+        if self._model is None:
+            raise ValueError("Cannot rotate an empty model.")
+
+        self._model = rotate_model(
+            model=self._model,
+            axis_start=axis_start,
+            axis_end=axis_end,
+            angle=angle,
+        )
+        
+        return self
 
     @staticmethod
     def build_ribbed_cylinder(
