@@ -14,13 +14,13 @@ from src.services.build_plate_service import generate_build_plate
 
 def main() -> None:
 
+    generated_files = generate_brick_collection()
+
     generate_build_plate(
         plate_width=250,
         plate_depth=250,
         spacing=3.0,
     )
-
-    generated_files = generate_brick_collection()
 
     print("\nCollection generation completed!")
     print(f"Generated {len(generated_files)} models.")

@@ -102,11 +102,11 @@ def optimize_layout(
             if selected is not None:
                 break
 
-            if selected is None:
-                raise ValueError(
-                    f"Model '{model.name}' cannot fit on the build plate."
-                )
+        if selected is None:
+            raise ValueError(
+                f"Model '{model.name}' cannot fit on the build plate."
+            )
 
-            placements.append(selected)
+        placements.append(selected)
 
-        return placements
+    return placements

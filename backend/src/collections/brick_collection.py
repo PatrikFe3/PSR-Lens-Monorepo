@@ -34,11 +34,13 @@ BRICK_COLLECTION = [
         "studs_x": 2,
         "studs_y": 2,
         "base_height": 2.4,
+        "underside_depth": 1.5,
     },
     {
         "name": "plate_4x2",
         "studs_x": 4,
         "studs_y": 2,
         "base_height": 2.4,
+        "underside_depth": 1.5,
     },
 ]

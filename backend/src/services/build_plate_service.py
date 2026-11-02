@@ -1,7 +1,6 @@
 from pathlib import Path
 
 import cadquery as cq
-from trame_vtk.modules.vtk.widget import value
 
 from src.config.paths import MODELS_DIR
 from src.collections.brick_collection import BRICK_COLLECTION
@@ -55,6 +54,8 @@ def generate_build_plate(
         spacing=spacing,
     )
 
+    print(f"\nNumber of placements: {len(placements)}")
+
     placed_models = []
 
     for placement in placements:
@@ -87,16 +88,16 @@ def generate_build_plate(
             f"Rotation={placement.rotation}°"
         )
 
-        compound = cq.Compound.makeCompound(placed_models)
+    compound = cq.Compound.makeCompound(placed_models)
 
-        output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
 
-        cq.exporters.export(
-            compound,
-            str(output_path),
-            exportType="STL",
-        )
+    cq.exporters.export(
+        compound,
+        str(output_path),
+        exportType="STL",
+    )
 
-        print(f"\nBuild plate exported: {output_path}")
+    print(f"\nBuild plate exported: {output_path}")
 
-        return output_path
+    return output_path
