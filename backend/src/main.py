@@ -1,8 +1,3 @@
-import cadquery as cq
-
-from src.geometry.generators.brick_generator import generate_brick
-from src.config.paths import MODELS_DIR
-
 from src.geometry.generators.beam_generator import generate_beam
 from src.printers.printer_profile import (
     PrinterProfile,
@@ -12,11 +7,32 @@ from src.geometry.model_builder import ModelBuilder
 from src.services.brick_collection_service import generate_brick_collection
 from src.services.build_plate_service import generate_build_plate
 
+from src.services.assembly_service import generate_assembly
+from src.assembly.assembly_component import AssemblyComponent
+
+
 def main() -> None:
+    components = [
+        AssemblyComponent(
+            component_type="brick_4x2",
+            x=0,
+            y=0,
+            z=0,
+        ),
+        AssemblyComponent(
+            component_type="brick_2x2",
+            x=0,
+            y=0,
+            z=5,
+        ),
+    ]
 
     generated_files = generate_brick_collection()
 
+    assembly_result = generate_assembly(components)
+
     generate_build_plate(
+        components=assembly_result.components,
         plate_width=250,
         plate_depth=250,
         spacing=3.0,

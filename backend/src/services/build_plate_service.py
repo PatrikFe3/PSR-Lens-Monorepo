@@ -2,6 +2,7 @@ from pathlib import Path
 
 import cadquery as cq
 
+from assembly.assembly_component import AssemblyComponent
 from src.config.paths import MODELS_DIR
 from src.collections.brick_collection import BRICK_COLLECTION
 from src.geometry.generators.brick_generator import generate_brick
@@ -14,6 +15,7 @@ from src.algorithms.layout_optimizer import (
 )
 
 def generate_build_plate(
+        components: list[AssemblyComponent],
         plate_width: float,
         plate_depth: float,
         spacing: float= 3.0,
@@ -23,9 +25,17 @@ def generate_build_plate(
     models = {}
     dimensions = []
 
-    for config in BRICK_COLLECTION:
+    brick_configs = {
+        brick["name"]: brick
+        for brick in BRICK_COLLECTION
+    }
 
-        name = config["name"]
+    for index, component in enumerate(components):
+
+        config = brick_configs.get(component.component_type)
+
+        if config is None:
+            raise ValueError(f"Component type {component.component_type} not supported")
 
         parameters = {
             key: value
@@ -35,17 +45,30 @@ def generate_build_plate(
 
         model = generate_brick(**parameters)
 
+        if component.rotation != 0:
+            model = rotate_model(
+                model=model,
+                axis_start=(0,0,0),
+                axis_end=(0,0,1),
+                angle=component.rotation,
+            )
+
         bounding_box = model.val().BoundingBox()
 
-        models[name] = model
+        instance_name = f"{component.component_type}_{index}"
+
+        models[instance_name] = model
 
         dimensions.append(
             ModelDimensions(
-                name=name,
+                name=instance_name,
                 width=bounding_box.xlen,
                 depth=bounding_box.ylen,
             )
         )
+
+    if not dimensions:
+        raise ValueError("Build plate must contain at least one component.")
 
     placements = optimize_layout(
         models=dimensions,
