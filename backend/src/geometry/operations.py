@@ -165,6 +165,8 @@ def intersect_models(
 ) -> cq.Workplane:
     return model_a.intersect(model_b, clean=True)
 
+
+
 #  Discuss these cadquery topics
 #  irregular_grid
 #  cq terrain

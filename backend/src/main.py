@@ -1,35 +1,69 @@
+import cadquery as cq
+from src.config.paths import MODELS_DIR
 from src.geometry.generators.beam_generator import generate_beam
 from src.printers.printer_profile import (
     PrinterProfile,
     validate_model_fits,
 )
+
+from src.assembly.assembly_plan_validator import validate_assembly_plan
+from src.data_models.assembly_plan import (
+    AssemblyPlan,
+    AssemblyInstruction,
+)
+
+from src.assembly.spatial_planner import plan_spatial_layout
+
 from src.geometry.model_builder import ModelBuilder
 from src.services.brick_collection_service import generate_brick_collection
 from src.services.build_plate_service import generate_build_plate
 
 from src.services.assembly_service import generate_assembly
-from src.assembly.assembly_component import AssemblyComponent
 
 
 def main() -> None:
-    components = [
-        AssemblyComponent(
-            component_type="brick_4x2",
-            x=0,
-            y=0,
-            z=0,
-        ),
-        AssemblyComponent(
-            component_type="brick_2x2",
-            x=0,
-            y=0,
-            z=5,
-        ),
-    ]
+
+    robot_plan = AssemblyPlan(
+        name="Simple Robot",
+        instructions=[
+            AssemblyInstruction(
+                component_id="base",
+                component_type="brick_4x2"
+            ),
+            AssemblyInstruction(
+                component_id="body",
+                component_type="brick_2x2",
+                parent_id="base",
+                attachment="top"
+            ),
+            AssemblyInstruction(
+                component_id="head",
+                component_type="brick_2x2",
+                parent_id="body",
+                attachment="top"
+            )
+        ]
+    )
+
+    validate_assembly_plan(robot_plan)
+
+    print("Assembly plan is valid!")
+
+    components = plan_spatial_layout(robot_plan)
 
     generated_files = generate_brick_collection()
 
     assembly_result = generate_assembly(components)
+
+    assembly_path = MODELS_DIR / "assembly.stl"
+
+    cq.exporters.export(
+        assembly_result.model,
+        str(assembly_path),
+        exportType="STL",
+    )
+
+    print(f"Assembly exported: {assembly_path.resolve()}")
 
     generate_build_plate(
         components=assembly_result.components,
