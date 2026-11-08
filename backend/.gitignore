@@ -15,3 +15,7 @@ venv/
 # Iné
 .DS_Store
 *.log
+
+# Test coverage
+.coverage
+htmlcov/

@@ -1,7 +1,7 @@
 import pytest
 import cadquery as cq
 
-from src.geometry.operations import (
+from src.geometry.operations.boolean import (
     union_models,
     cut_model,
     intersect_models,

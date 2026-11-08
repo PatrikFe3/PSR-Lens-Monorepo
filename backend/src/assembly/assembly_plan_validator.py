@@ -9,7 +9,10 @@ def validate_assembly_plan(plan: AssemblyPlan) -> None:
     for instruction in plan.instructions:
 
         if not instruction.component_id:
-            raise ValueError(f"Duplicate component ID: {instruction.component_id}")
+            raise ValueError("Component ID cannot be empty.")
+
+        if instruction.component_id in component_ids:
+            raise ValueError(f"Duplicate component ID {instruction.component_id}")
 
         component_ids.add(instruction.component_id)
 

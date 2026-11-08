@@ -4,15 +4,19 @@ from src.config.paths import MODELS_DIR
 from src.geometry.deformers.taper import apply_taper_deformer
 from src.geometry.transformations.translate import translate_model
 from src.geometry.transformations.rotate import rotate_model
-from src.geometry.operations import (
-    create_cylinder,
-    add_circular_ribs,
-    smooth_bevel,
-    hard_bevel,
-    add_twisted_ribs,
+from src.geometry.operations.boolean import (
     union_models,
     cut_model,
     intersect_models,
+)
+from src.geometry.operations.edge_modifications import (
+    smooth_bevel,
+    hard_bevel,
+)
+from src.geometry.generators.radial_structure_generator import (
+    create_cylinder,
+    add_circular_ribs,
+    add_twisted_ribs,
 )
 
 class ModelBuilder:

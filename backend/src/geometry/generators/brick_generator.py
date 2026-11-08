@@ -1,6 +1,6 @@
 import cadquery as cq
 
-from src.geometry.operations import create_cylinder
+from src.geometry.primitives import create_cylinder
 from src.geometry.primitives import create_pipe
 from src.geometry.primitives import (
     create_box,
