@@ -28,7 +28,7 @@ def main() -> None:
         instructions=[
             AssemblyInstruction(
                 component_id="base",
-                component_type="brick_4x2"
+                component_type="brick_6x2"
             ),
             AssemblyInstruction(
                 component_id="body",
@@ -38,8 +38,14 @@ def main() -> None:
             ),
             AssemblyInstruction(
                 component_id="head",
-                component_type="brick_2x2",
+                component_type="brick_6x2",
                 parent_id="body",
+                attachment="top"
+            ),
+            AssemblyInstruction(
+                component_id="hair",
+                component_type="brick_4x2",
+                parent_id="head",
                 attachment="top"
             )
         ]
