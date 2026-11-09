@@ -1,4 +1,4 @@
-#2D Rectangle Packing
+#2D Rectangle Packing, heuristic layout optimizer
 
 from dataclasses import dataclass
 
