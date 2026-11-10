@@ -25,5 +25,5 @@ def validate_generation_request(request: GenerationRequest) -> None:
     if len(prompt) < MIN_PROMPT_LENGTH:
         raise ValueError("Prompt is too short.")
 
-    if not isinstance(request.complexity, GenerationRequest):
+    if not isinstance(request.complexity, GenerationComplexity):
         raise ValueError("Invalid generation complexity.")

@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
-from data_models import generation_complexity
-from printers.printer_profile import PrinterProfile
+from src.data_models import generation_complexity
+from src.printers.printer_profile import PrinterProfile
 
 
 @dataclass
