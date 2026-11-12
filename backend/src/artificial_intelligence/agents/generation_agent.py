@@ -1,5 +1,5 @@
-from typing import Callable, Any
-
+from collections.abc import Callable
+from typing import Any
 from src.artificial_intelligence.agents.tool import AgentTool
 from src.artificial_intelligence.agents.tool_call import ToolCall
 from src.artificial_intelligence.agents.tool_registry import ToolRegistry

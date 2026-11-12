@@ -28,24 +28,48 @@ def main() -> None:
         instructions=[
             AssemblyInstruction(
                 component_id="base",
-                component_type="brick_6x2"
+                component_type="brick_2x1"
             ),
             AssemblyInstruction(
-                component_id="body",
-                component_type="brick_2x2",
+                component_id="body_01",
+                component_type="brick_4x2",
                 parent_id="base",
                 attachment="top"
             ),
             AssemblyInstruction(
-                component_id="head",
+                component_id="body_02",
                 component_type="brick_6x2",
-                parent_id="body",
+                parent_id="body_01",
                 attachment="top"
             ),
             AssemblyInstruction(
-                component_id="hair",
+                component_id="neck_01",
+                component_type="brick_2x2",
+                parent_id="body_02",
+                attachment="top"
+            ),
+            AssemblyInstruction(
+                component_id="neck_02",
                 component_type="brick_4x2",
-                parent_id="head",
+                parent_id="neck_01",
+                attachment="top"
+            ),
+            AssemblyInstruction(
+                component_id="neck_03",
+                component_type="brick_2x2",
+                parent_id="neck_02",
+                attachment="top"
+            ),
+            AssemblyInstruction(
+                component_id="neck_04",
+                component_type="brick_4x2",
+                parent_id="neck_03",
+                attachment="top"
+            ),
+            AssemblyInstruction(
+                component_id="head",
+                component_type="brick_1x1",
+                parent_id="neck_04",
                 attachment="top"
             )
         ]
