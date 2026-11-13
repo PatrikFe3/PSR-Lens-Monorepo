@@ -25,7 +25,8 @@ ASSEMBLY_PLAN_SCHEMA = {
                                 "type": ["string", "null"]
                             },
                             "attachment": {
-                                "type": ["string", "null"]
+                                "type": ["string", "null"],
+                                "enum": ["top", None]
                             }
                         },
                         "required": [

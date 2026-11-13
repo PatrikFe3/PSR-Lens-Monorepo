@@ -7,7 +7,6 @@ def validate_assembly_plan(plan: AssemblyPlan) -> None:
     component_ids = set()
 
     for instruction in plan.instructions:
-
         if not instruction.component_id:
             raise ValueError("Component ID cannot be empty.")
 
@@ -15,6 +14,11 @@ def validate_assembly_plan(plan: AssemblyPlan) -> None:
             raise ValueError(f"Duplicate component ID {instruction.component_id}")
 
         component_ids.add(instruction.component_id)
+
+    parents = {
+        instruction.component_id: instruction.parent_id
+        for instruction in plan.instructions
+    }
 
     for instruction in plan.instructions:
 
@@ -32,19 +36,16 @@ def validate_assembly_plan(plan: AssemblyPlan) -> None:
         if not instruction.attachment:
             raise ValueError(f"Component {instruction.component_id} must define an attachment.")
 
-        parents = {
-            instruction.component_id: instruction.parent_id
-            for instruction in plan.instructions
-        }
+        if instruction.attachment != "top":
+            raise ValueError(
+                f"Invalid attachment for component {instruction.component_id}."
+            )
 
         for component_id in component_ids:
-
             visited = set()
-
             current_id = component_id
 
             while current_id is not None:
-
                 if current_id in visited:
                     raise ValueError(f"Circular parent relationship detected at '{current_id}'.")
 
