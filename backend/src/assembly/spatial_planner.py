@@ -1,10 +1,31 @@
+from src.data_models.component_position import ComponentPosition
+from src.validators.assembly_plan_validator import validate_assembly_plan
 from src.data_models.assembly_plan import AssemblyPlan
 from src.assembly.assembly_component import AssemblyComponent
 from src.collections.brick_collection import BRICK_COLLECTION
+from src.data_models.component_dimensions import ComponentDimensions
+
+
+def get_component_dimensions(
+        config: dict,
+) -> ComponentDimensions:
+    stud_spacing = config.get("stud_spacing", 8.0)
+
+    length = config["studs_x"] * stud_spacing
+    width = config["studs_y"] * stud_spacing
+    height = config.get("base_height", 5.0)
+
+    return ComponentDimensions(
+        length=length,
+        width=width,
+        height=height,
+    )
 
 def plan_spatial_layout(
         plan: AssemblyPlan,
 ) -> list[AssemblyComponent]:
+
+    validate_assembly_plan(plan)
 
     brick_configs = {
         brick["name"]: brick
@@ -15,11 +36,13 @@ def plan_spatial_layout(
     placed_by_id = {}
     pending = list(plan.instructions)
 
+
     while pending:
 
         progress = False
+        instruction_to_process = list(pending)
 
-        for instruction in pending[:]:
+        for instruction in instruction_to_process:
 
             if instruction.component_type not in brick_configs:
                 raise ValueError(
@@ -30,38 +53,36 @@ def plan_spatial_layout(
 
             if instruction.parent_id is None:
 
-                component = AssemblyComponent(
-                    component_type=instruction.component_type,
-                    x=0,
-                    y=0,
-                    z=0,
+                dimensions = get_component_dimensions(config)
+
+                position = ComponentPosition(
+                    x=0.0,
+                    y=0.0,
+                    z=dimensions.height / 2,
                 )
 
             elif instruction.parent_id in placed_by_id:
 
-                if instruction.attachment != "top":
-                    raise ValueError(
-                        f"Unsupported attachment: {instruction.attachment}"
-                    )
-
-                parent_component, parent_config = placed_by_id[instruction.parent_id]
-
-                parent_height = parent_config.get("base_height", 5.0)
-                child_height = config.get("base_height", 5.0)
-
-                component = AssemblyComponent(
-                    component_type=instruction.component_type,
-                    x=parent_component.x,
-                    y=parent_component.y,
-                    z=(
-                        parent_component.z
-                        + parent_height / 2
-                        + child_height / 2
-                    ),
+                parent_component, parent_config = (
+                    placed_by_id[instruction.parent_id]
                 )
-            else:
 
+                position = calculate_child_position(
+                    parent_component=parent_component,
+                    parent_config=parent_config,
+                    child_config=config,
+                    attachment=instruction.attachment,
+                )
+
+            else:
                 continue
+
+            component = AssemblyComponent(
+                component_type=instruction.component_type,
+                x=position.x,
+                y=position.y,
+                z=position.z,
+            )
 
             components.append(component)
 
@@ -80,3 +101,46 @@ def plan_spatial_layout(
             )
 
     return components
+
+def calculate_child_position(
+        parent_component: AssemblyComponent,
+        parent_config: dict,
+        child_config: dict,
+        attachment: str,
+) -> ComponentPosition:
+
+    parent_dimensions = get_component_dimensions(parent_config)
+    child_dimensions = get_component_dimensions(child_config)
+
+    x = parent_component.x
+    y = parent_component.y
+    z = parent_component.z
+
+    if attachment == "top":
+        z += (parent_dimensions.height / 2 + child_dimensions.height / 2)
+
+    elif attachment == "bottom":
+        z -= (parent_dimensions.height / 2 + child_dimensions.height / 2)
+
+    elif attachment == "right":
+        x += (parent_dimensions.length / 2 + child_dimensions.length / 2)
+
+    elif attachment == "left":
+        x -= (parent_dimensions.length / 2 + child_dimensions.length / 2)
+
+    elif attachment == "front":
+        y += (parent_dimensions.width / 2 + child_dimensions.width / 2)
+
+    elif attachment == "back":
+        y -= (parent_dimensions.width / 2 + child_dimensions.width / 2)
+
+    else:
+        raise ValueError(
+            f"Unsupported attachment: {attachment}"
+        )
+    return ComponentPosition(
+        x=x,
+        y=y,
+        z=z,
+    )
+

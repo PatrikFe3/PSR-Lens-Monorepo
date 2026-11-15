@@ -6,7 +6,7 @@ from src.printers.printer_profile import (
     validate_model_fits,
 )
 
-from src.assembly.assembly_plan_validator import validate_assembly_plan
+from src.validators.assembly_plan_validator import validate_assembly_plan
 from src.data_models.assembly_plan import (
     AssemblyPlan,
     AssemblyInstruction,
@@ -58,19 +58,19 @@ def main() -> None:
                 component_id="neck_03",
                 component_type="brick_2x2",
                 parent_id="neck_02",
-                attachment="top"
+                attachment="front"
             ),
             AssemblyInstruction(
                 component_id="neck_04",
                 component_type="brick_4x2",
                 parent_id="neck_03",
-                attachment="top"
+                attachment="right"
             ),
             AssemblyInstruction(
                 component_id="head",
                 component_type="brick_1x1",
                 parent_id="neck_04",
-                attachment="top"
+                attachment="left"
             )
         ]
     )

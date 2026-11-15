@@ -12,7 +12,7 @@ from src.data_models.generation_request import GenerationRequest
 from src.data_models.prompt_interpretation import PromptInterpretation
 
 from src.data_models.assembly_plan import AssemblyInstruction, AssemblyPlan
-from src.assembly.assembly_plan_validator import validate_assembly_plan
+from src.validators.assembly_plan_validator import validate_assembly_plan
 
 
 class PromptInterpreter:

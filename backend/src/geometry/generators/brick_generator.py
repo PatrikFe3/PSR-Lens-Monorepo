@@ -117,3 +117,9 @@ def generate_brick(
 
     return builder.build()
 
+model = generate_brick(
+    studs_x=4,
+    studs_y=2,
+)
+
+
