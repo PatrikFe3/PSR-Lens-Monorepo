@@ -1,6 +1,6 @@
-from src.artificial_intelligence.ollama_client import OllamaClient
-from src.artificial_intelligence.prompt_interpreter import PromptInterpreter
-from src.artificial_intelligence.agents.generation_agent import GenerationAgent
+from src.ai.ollama_client import OllamaClient
+from src.ai.prompt_interpreter import PromptInterpreter
+from src.ai.agents.generation_agent import GenerationAgent
 
 from src.data_models.generation_request import GenerationRequest
 from src.data_models.generation_complexity import GenerationComplexity

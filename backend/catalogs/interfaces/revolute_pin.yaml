@@ -1,0 +1,9 @@
+id: revolute_pin
+kind: revolute
+description: Printed pin in a bore, friction-held, 5 mm pin.
+fit: snug
+params: { pin_diameter: 5.0, pin_length: 8.0, boss_diameter: 12.0, boss_height: 3.0 }
+gap: 3.0
+male_feature: pin_boss
+female_feature: bore_boss
+hardware: []

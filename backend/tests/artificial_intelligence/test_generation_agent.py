@@ -1,10 +1,10 @@
 import pytest
 from unittest.mock import Mock
 
-from src.artificial_intelligence.agents.tool import AgentTool
-from src.artificial_intelligence.agents.generation_agent import GenerationAgent
-from src.artificial_intelligence.agents.tool_call import ToolCall
-from src.artificial_intelligence.agents.tool_registry import ToolRegistry
+from src.ai.agents.tool import AgentTool
+from src.ai.agents.generation_agent import GenerationAgent
+from src.ai.agents.tool_call import ToolCall
+from src.ai.agents.tool_registry import ToolRegistry
 from src.data_models.generation_request import GenerationRequest
 from src.data_models.generation_complexity import GenerationComplexity
 from src.printers.printer_profile import PrinterProfile

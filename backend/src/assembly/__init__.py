@@ -4,4 +4,4 @@ from src.data_models.assembly_plan import (
     AssemblyInstruction,
 )
 
-from src.validators.assembly_plan_validator import validate_assembly_plan
+from src.validation.assembly_plan_validator import validate_assembly_plan

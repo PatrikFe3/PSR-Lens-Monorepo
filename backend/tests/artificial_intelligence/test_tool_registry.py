@@ -1,7 +1,7 @@
 import pytest
 
-from src.artificial_intelligence.agents.tool import AgentTool
-from src.artificial_intelligence.agents.tool_registry import ToolRegistry
+from src.ai.agents.tool import AgentTool
+from src.ai.agents.tool_registry import ToolRegistry
 
 
 @pytest.fixture

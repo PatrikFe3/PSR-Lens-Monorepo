@@ -1,5 +1,5 @@
 from src.data_models.component_position import ComponentPosition
-from src.validators.assembly_plan_validator import validate_assembly_plan
+from src.validation.assembly_plan_validator import validate_assembly_plan
 from src.data_models.assembly_plan import AssemblyPlan
 from src.assembly.assembly_component import AssemblyComponent
 from src.collections.brick_collection import BRICK_COLLECTION

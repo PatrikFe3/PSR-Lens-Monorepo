@@ -1,4 +1,4 @@
-from src.artificial_intelligence.ollama_client import OllamaClient
+from src.ai.ollama_client import OllamaClient
 
 
 client = OllamaClient()

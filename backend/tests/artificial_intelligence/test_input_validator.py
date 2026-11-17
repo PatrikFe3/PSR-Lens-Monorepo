@@ -1,7 +1,7 @@
 import pytest
 from unittest.mock import Mock
 
-from src.artificial_intelligence.input_validator import (
+from src.ai.input_validator import (
     validate_generation_request,
 )
 from src.data_models.generation_complexity import GenerationComplexity

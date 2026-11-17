@@ -20,3 +20,7 @@ venv/
 # Test coverage
 .coverage
 htmlcov/
+
+# Generated designs
+artifacts/designs/
+demo_test/output/

@@ -1,0 +1,22 @@
+id: prusa_mk4s
+name: Prusa MK4S
+technology: FDM
+bed:
+  shape: rect
+  width: 250
+  depth: 210
+  margin: 4
+  # One rectangle per excluded strip: (x0, y0, x1, y1). The front 8 mm are not used.
+  exclusions: [[0, 0, 250, 8]]
+
+max_height: 220
+nozzle_diameter: 0.4
+min_wall_lines: 2
+default_wall: 2.0
+min_gap: 1.0
+part_spacing: 6
+fit_classes:
+  press: 0.05
+  snug: 0.15
+  sliding: 0.25
+  loose: 0.40

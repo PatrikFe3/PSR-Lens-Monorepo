@@ -1,6 +1,6 @@
 from src.printers.printer_profile import PrinterProfile
-from src.artificial_intelligence.ollama_client import OllamaClient
-from src.artificial_intelligence.prompt_interpreter import PromptInterpreter
+from src.ai.ollama_client import OllamaClient
+from src.ai.prompt_interpreter import PromptInterpreter
 from src.data_models.generation_request import GenerationRequest
 from src.data_models.generation_complexity import GenerationComplexity
 
