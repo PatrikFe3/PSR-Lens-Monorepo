@@ -6,4 +6,4 @@ Monorepo containing the Frontend, Backend, and E2E tests for the project.
 
 - `frontend/` - Angular frontend
 - `backend/` - ASP.NET Core backend
-- `e2e-tests/` - C# Selenium E2E tests
+- `e2e-tests/` - Python Selenium E2E tests
