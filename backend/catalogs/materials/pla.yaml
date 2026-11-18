@@ -1,0 +1,7 @@
+id: pla
+name: PLA
+density_g_cm3: 1.24
+clearance_factor: 1.0
+brim: 0
+pilot_hole: { M2: 1.7, M2.5: 2.2, M3: 2.6 }
+insert_hole: { M2.5: [3.6, 4.0], M3: [4.0, 5.0] }

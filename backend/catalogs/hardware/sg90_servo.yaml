@@ -1,0 +1,15 @@
+id: sg90_servo
+name: TowerPro SG90 micro servo
+category: actuator
+description: 9 g micro servo, 23 x 12 mm body, mounting tabs 32 mm wide, output shaft on top.
+# The "board" is the mounting-tab plate; the body hangs below it, gears and shaft sit above.
+board: { length: 32.2, width: 12.2, thickness: 2.5 }
+envelope: { above: 11.5, below: 16.0 }
+mass_g: 9
+mounting:
+  screw: M2
+  hole_diameter: 2.0
+  holes: [[2.2, 6.1], [30.0, 6.1]]
+  standoff_height: 1.0
+connectors:
+  - { id: cable, type: servo_3pin, position: [4.0, 6.1], cable_exit: -X, cable_length: 250 }

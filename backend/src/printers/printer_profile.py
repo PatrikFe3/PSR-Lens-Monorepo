@@ -8,7 +8,7 @@ class PrinterProfile:
     build_volume_z: float
     technology: str = "FDM"
     filament_diameter: float=1.75
-    nozzle_diameter: float=1.75
+    nozzle_diameter: float=0.4
 
     max_nozzle_temperature: float| None = None
     max_bed_temperature: float| None = None

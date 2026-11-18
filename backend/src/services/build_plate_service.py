@@ -2,7 +2,7 @@ from pathlib import Path
 
 import cadquery as cq
 
-from assembly.assembly_component import AssemblyComponent
+from src.assembly.assembly_component import AssemblyComponent
 from src.config.paths import MODELS_DIR
 from src.collections.brick_collection import BRICK_COLLECTION
 from src.geometry.generators.brick_generator import generate_brick

@@ -12,10 +12,18 @@ venv/
 # Environment variables
 .env
 
-# Iné
+# Others
 .DS_Store
 *.log
+.mcp.json
 
 # Test coverage
 .coverage
 htmlcov/
+
+# Old meshes
+artifacts/models
+
+# Generated designs
+artifacts/designs/
+demo_test/output/

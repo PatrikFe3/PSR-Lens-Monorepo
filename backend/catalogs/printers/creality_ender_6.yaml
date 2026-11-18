@@ -1,0 +1,21 @@
+id: creality_ender_6
+name: Creality Ender 6
+technology: FDM
+bed:
+  shape: rect
+  width: 250
+  depth: 250
+  margin: 5
+  exclusions: []
+
+max_height: 400
+nozzle_diameter: 0.4
+min_wall_lines: 2
+default_wall: 2.0
+min_gap: 1.0
+part_spacing: 6
+fit_classes:
+  press: 0.05
+  snug: 0.15
+  sliding: 0.25
+  loose: 0.40

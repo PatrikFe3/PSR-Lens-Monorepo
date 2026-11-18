@@ -1,0 +1,10 @@
+id: screw_m2_5
+kind: fixed
+description: Two M2.5 screws through the child into pilot holes in the parent.
+fit: loose
+params: { screw_diameter: 2.5, spacing: 12.0, length: 8.0 }
+gap: 0.0
+male_feature: pilot_holes
+female_feature: clearance_holes
+hardware:
+  - { ref: M2.5x8 screw, qty: 2 }

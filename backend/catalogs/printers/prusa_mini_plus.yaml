@@ -1,0 +1,21 @@
+id: prusa_mini_plus
+name: Prusa MINI+
+technology: FDM
+bed:
+  shape: rect
+  width: 180
+  depth: 180
+  margin: 3
+  exclusions: []
+
+max_height: 180
+nozzle_diameter: 0.4
+min_wall_lines: 2
+default_wall: 2.0
+min_gap: 1.0
+part_spacing: 5
+fit_classes:
+  press: 0.05
+  snug: 0.15
+  sliding: 0.25
+  loose: 0.40

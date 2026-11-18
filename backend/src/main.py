@@ -6,7 +6,7 @@ from src.printers.printer_profile import (
     validate_model_fits,
 )
 
-from src.assembly.assembly_plan_validator import validate_assembly_plan
+from src.validation.assembly_plan_validator import validate_assembly_plan
 from src.data_models.assembly_plan import (
     AssemblyPlan,
     AssemblyInstruction,
@@ -28,25 +28,49 @@ def main() -> None:
         instructions=[
             AssemblyInstruction(
                 component_id="base",
-                component_type="brick_6x2"
+                component_type="brick_2x1"
             ),
             AssemblyInstruction(
-                component_id="body",
-                component_type="brick_2x2",
+                component_id="body_01",
+                component_type="brick_4x2",
                 parent_id="base",
                 attachment="top"
             ),
             AssemblyInstruction(
-                component_id="head",
+                component_id="body_02",
                 component_type="brick_6x2",
-                parent_id="body",
+                parent_id="body_01",
                 attachment="top"
             ),
             AssemblyInstruction(
-                component_id="hair",
-                component_type="brick_4x2",
-                parent_id="head",
+                component_id="neck_01",
+                component_type="brick_2x2",
+                parent_id="body_02",
                 attachment="top"
+            ),
+            AssemblyInstruction(
+                component_id="neck_02",
+                component_type="brick_4x2",
+                parent_id="neck_01",
+                attachment="top"
+            ),
+            AssemblyInstruction(
+                component_id="neck_03",
+                component_type="brick_2x2",
+                parent_id="neck_02",
+                attachment="front"
+            ),
+            AssemblyInstruction(
+                component_id="neck_04",
+                component_type="brick_4x2",
+                parent_id="neck_03",
+                attachment="right"
+            ),
+            AssemblyInstruction(
+                component_id="head",
+                component_type="brick_1x1",
+                parent_id="neck_04",
+                attachment="left"
             )
         ]
     )

@@ -101,7 +101,7 @@ def create_coil(
     start_point = path.Vertices()[0].Center()
 
     profile = (
-        cq.Workplane("XY")
+        cq.Workplane("XZ")
         .workplane(offset=start_point.z)
         .center(start_point.x, start_point.y)
         .circle(wire_radius)
@@ -111,3 +111,5 @@ def create_coil(
         path,
         isFrenet=True,
     )
+
+

@@ -1,0 +1,8 @@
+id: petg
+name: PETG
+density_g_cm3: 1.27
+# PETG prints slightly "fat", so fits get a little more clearance than PLA.
+clearance_factor: 1.15
+brim: 0
+pilot_hole: { M2: 1.8, M2.5: 2.3, M3: 2.7 }
+insert_hole: { M2.5: [3.7, 4.0], M3: [4.1, 5.0] }

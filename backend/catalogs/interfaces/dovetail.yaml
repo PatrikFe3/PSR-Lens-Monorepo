@@ -1,0 +1,9 @@
+id: dovetail
+kind: fixed
+description: Printed dovetail tongue on the parent that slides into a slot in the child.
+fit: sliding
+params: { width_top: 10.0, width_base: 7.0, depth: 4.0, length: 16.0 }
+gap: 0.0
+male_feature: dovetail_tongue
+female_feature: dovetail_slot
+hardware: []

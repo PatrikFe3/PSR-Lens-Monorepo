@@ -1,0 +1,24 @@
+id: raspberry_pi_4b
+name: Raspberry Pi 4 Model B
+category: sbc
+description: Single-board computer, 85 x 56 mm, needs airflow over the SoC.
+board: { length: 85.0, width: 56.0, thickness: 1.4 }
+envelope: { above: 16.0, below: 2.0 }
+mass_g: 46
+mounting:
+  screw: M2.5
+  hole_diameter: 2.7
+  holes: [[3.5, 3.5], [61.5, 3.5], [3.5, 52.5], [61.5, 52.5]]
+  standoff_height: 5.0
+
+ports:
+  - { id: usb_c_power, face: -Y, center: [11.2, 3.2], size: [9.0, 3.4], required: true }
+  - { id: hdmi_0, face: -Y, center: [26.0, 3.0], size: [7.5, 3.6] }
+  - { id: hdmi_1, face: -Y, center: [39.5, 3.0], size: [7.5, 3.6] }
+  - { id: usb_eth, face: +X, center: [ 28.0, 8.0 ], size: [ 54.0, 16.0 ], required: true }
+  - { id: sd_card, face: -X, center: [28.0, -1.0], size: [12.0, 2.0] }
+connectors:
+  - { id: csi, type: ffc_15pin, position: [45.0, 11.5], cable_exit: +Z }
+heat_sources:
+  - { id: soc, position: [29.0, 32.0], power_w: 4.0 }
+

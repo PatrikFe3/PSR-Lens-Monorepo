@@ -1,0 +1,16 @@
+id: rpi_camera_module_3
+name: Raspberry Pi Camera Module 3
+category: camera
+description: 12 MP autofocus camera board, 25 x 24 mm, ribbon cable to the CSI port.
+board: { length: 25.0, width: 24.0, thickness: 1.0}
+envelope: { above: 11.5, below: 1.5 }
+mass_g: 4
+mounting:
+  screw: M2
+  hole_diameter: 2.2
+  holes: [[2.0, 2.0], [23.0, 2.0], [2.0, 14.5], [23.0, 14.5]]
+  standoff_height: 2.0
+optics: { position: [12.5, 14.5], direction: +Z, fov_deg: 75, lens_clearance: 8.0 }
+connectors:
+  - { id: csi, type: ffc_15pin, position: [ 12.5, 0.0 ], cable_exit: -Y, cable_length: 200 }
+

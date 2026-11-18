@@ -11,6 +11,9 @@ def generate_assembly(
         components: list[AssemblyComponent],
 ) -> AssemblyResult:
 
+    if not components:
+        raise ValueError("Assembly must contain at least one component.")
+
     placed_models = []
 
     brick_configs = {
@@ -52,8 +55,6 @@ def generate_assembly(
 
         placed_models.append(model.val())
 
-    if not placed_models:
-        raise ValueError("Assembly must contain at least one component.")
 
     assembly_model = cq.Compound.makeCompound(placed_models)
 

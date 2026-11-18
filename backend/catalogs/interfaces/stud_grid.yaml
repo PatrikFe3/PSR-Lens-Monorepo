@@ -1,0 +1,9 @@
+id: stud_grid
+kind: fixed
+description: LEGO-style 2 x 2 grid of studs on the parent that press into sockets in the child.
+fit: snug
+params: { pitch: 8.0, stud_diameter: 4.8, stud_height: 1.7, count_x: 2, count_y: 2 }
+gap: 0.0
+male_feature: studs
+female_feature: stud_sockets
+hardware: []

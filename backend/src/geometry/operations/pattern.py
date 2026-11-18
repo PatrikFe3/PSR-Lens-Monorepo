@@ -71,7 +71,7 @@ def linear_array(
     for i in range (count):
 
         if centered:
-            offset = (i - (count - 1)) / 2 * spacing
+            offset = (i - (count - 1) / 2) * spacing
         else:
             offset = i * spacing
 
