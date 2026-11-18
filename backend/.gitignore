@@ -21,6 +21,9 @@ venv/
 .coverage
 htmlcov/
 
+# Old meshes
+artifacts/models
+
 # Generated designs
 artifacts/designs/
 demo_test/output/
