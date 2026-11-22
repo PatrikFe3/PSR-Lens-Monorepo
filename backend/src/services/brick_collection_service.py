@@ -25,7 +25,7 @@ def generate_brick_collection(
 
         print(f"Generating: {name}")
 
-        model = generate_brick(**parameters) #The usage of ** is to unwrap the dictionary from named argument functions
+        model = generate_brick(**parameters)
 
         output_path = output_dir / f"{name}.stl"
 

@@ -1,4 +1,6 @@
-"""An L-shaped bracket that holds a small board (e.g. a camera) upright, facing -Y."""
+"""
+    An L-shaped bracket that holds a small board (e.g. a camera) upright, facing -Y.
+"""
 import numpy as np
 
 from src.core.frames import Frame, rot_x, translate
@@ -18,7 +20,7 @@ _UPRIGHT = np.array([[1.0, 0.0, 0.0, 0.0],
 class SensorMountParams(TemplateParams):
     hardware: str
     wall: float | Auto = 'auto'
-    margin: float | Auto = 'auto'      # border around the board on the upright plate
+    margin: float | Auto = 'auto'
 
 
 class SensorMount(Template):

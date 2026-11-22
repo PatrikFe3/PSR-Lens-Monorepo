@@ -1,4 +1,6 @@
-"""One entry point for the new system, used by the API and the demo."""
+"""
+One entry point for the new system, used by the API and the demo.
+"""
 import uuid
 from pathlib import Path
 
@@ -34,8 +36,12 @@ class DesignService:
     def parse_spec(spec) -> DesignSpec:
         return spec if isinstance(spec, DesignSpec) else DesignSpec.model_validate(spec)
 
+    """
+    Run every check without writing files. 
+    Returns: the list of (warning) issues.
+    """
     def check(self, spec, printer=None, material=None):
-        """Run every check without writing files. Returns the list of (warning) issues."""
+
         p, m = self._profiles(printer, material)
         return validate_design(self.parse_spec(spec), self.catalog, self.templates, p, m)[3]
 
@@ -54,9 +60,13 @@ class DesignService:
         p, _ = self._profiles(printer)
         return design_prompt(request, p, catalog_brief(self.catalog, self.templates))
 
+    """
+    Natural language -> LLM spec -> checked, built design. 
+    Returns (DesignSpec, BuildResult).
+    """
     def design_from_prompt(self, request: str, llm=None, ask_user=True, printer=None, material=None,
                            log=None):
-        """Natural language -> LLM spec -> checked, built design. Returns (DesignSpec, BuildResult)."""
+
         if llm is None:
             from src.ai.ollama_client import OllamaClient
             llm = OllamaClient()

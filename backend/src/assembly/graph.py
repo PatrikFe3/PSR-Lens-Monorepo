@@ -1,4 +1,6 @@
-"""The connection graph of a design: which part hangs on which."""
+"""
+The connection graph of a design: which part hangs on which.
+"""
 from collections import deque
 from dataclasses import dataclass, field
 
@@ -14,7 +16,6 @@ class AssemblyTree:
 
 
 def assembly_tree(spec) -> tuple[AssemblyTree, list[Issue]]:
-    """Build the parent/child tree and report every structural problem."""
     issues: list[Issue] = []
     part_ids = [p.id for p in spec.parts]
     known = set(part_ids)

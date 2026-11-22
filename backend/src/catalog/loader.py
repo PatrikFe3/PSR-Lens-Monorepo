@@ -24,7 +24,6 @@ class Catalog:
 
 
 def load_catalog(root: Path | str | None = None) -> Catalog:
-    """Load ``catalogs/{hardware,interfaces,printers,materials}/*.yaml``."""
     if root is None:
         from src.core.settings import get_settings
         root = get_settings().catalog_dir

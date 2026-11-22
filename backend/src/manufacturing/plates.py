@@ -1,4 +1,6 @@
-"""Turn printable bodies into one or more build plates."""
+"""
+Turn printable bodies into one or more build plates.
+"""
 from pathlib import Path
 
 import numpy as np

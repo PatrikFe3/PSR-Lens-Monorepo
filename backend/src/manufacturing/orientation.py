@@ -1,4 +1,3 @@
-"""Choose how each body lies on the print bed."""
 import numpy as np
 
 from src.core.frames import rot_x, rot_y, translate
@@ -15,7 +14,6 @@ _DOWN = {
 }
 
 def _score(mesh: TriMesh, max_overhang_deg=45.0) -> float:
-    """Big flat contact area is good; overhangs and tall prints are bad."""
     z = mesh.triangles[:, :, 2]
     nz = mesh.face_normals[:, 2]
     on_bed = (nz < -0.99) & (z.max(axis=1) < z.min() + 0.05)
@@ -25,7 +23,6 @@ def _score(mesh: TriMesh, max_overhang_deg=45.0) -> float:
 
 
 def orient(mesh: TriMesh, hint: str | None) -> np.ndarray:
-    """Matrix that lays the mesh on the bed with its lowest corner at the origin."""
     if hint:
         if hint not in _DOWN:
             raise ValueError(f'Unknown print direction {hint!r}. Use one of {sorted(_DOWN)}.')

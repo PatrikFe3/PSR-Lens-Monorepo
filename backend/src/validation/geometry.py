@@ -1,4 +1,6 @@
-"""Sanity checks on the built solids."""
+"""
+    Sanity checks on the built solids.
+"""
 from src.core.issues import Issue
 from src.geometry.kernel import kernel
 

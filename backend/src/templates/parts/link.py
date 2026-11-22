@@ -1,4 +1,7 @@
-"""A flat arm with rounded ends: one site underneath one end, one on top of the other end."""
+"""
+    A flat arm with rounded ends: one site underneath one end
+    one on top of the other end.
+"""
 from src.core.frames import Frame
 from src.geometry.kernel import kernel
 from src.templates.base import (ALL_INTERFACES, Auto, Body, BuildContext, BuiltPart, Site, Template,

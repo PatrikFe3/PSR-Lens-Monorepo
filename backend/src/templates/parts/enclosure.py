@@ -1,4 +1,6 @@
-"""A two-piece box (tray + lid) sized automatically around one circuit board."""
+"""
+    A two-piece box (tray + lid) sized automatically around one circuit board.
+"""
 import numpy as np
 
 from src.core.frames import Frame, translate

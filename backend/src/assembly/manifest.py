@@ -5,7 +5,6 @@ from src.assembly.solver import child_offset, parent_frame
 
 
 def _rows(m: np.ndarray) -> list[float]:
-    """Row-major 4x4 matrix as a flat list of 16 floats."""
     return [round(float(v), 6) for v in np.asarray(m).reshape(-1)]
 
 
@@ -55,7 +54,6 @@ def build_manifest(assembly, design_id, issues, hardware=None) -> dict:
 
 
 def body_to_glb(shape, path, tolerance=0.1, angular=0.2):
-    """Tessellate a kernel shape and write it as GLB. Returns the TriMesh."""
     from src.geometry.kernel import kernel
     from src.geometry.mesh import TriMesh
     from src.manufacturing.export import write_glb

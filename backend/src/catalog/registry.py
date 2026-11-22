@@ -12,7 +12,6 @@ class CatalogError(Exception):
 
 
 class Registry(Generic[T]):
-    """Loads every ``*.yaml`` file of one folder into validated models, keyed by id."""
 
     def __init__(self, model: type[T], folder: Path):
         self._items: dict[str, T] = {}

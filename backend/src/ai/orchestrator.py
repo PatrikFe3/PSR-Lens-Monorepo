@@ -1,4 +1,6 @@
-"""The AI design loop: ask the LLM for a spec, build it, feed failures back, retry."""
+"""
+
+"""
 from pydantic import ValidationError
 from src.ai.prompt import revision_prompt
 from src.core.issues import DesignError, Issue

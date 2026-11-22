@@ -1,4 +1,6 @@
-"""Checks that every piece of hardware has a home and can work there."""
+"""
+    Checks that every piece of hardware has a home and can work there.
+"""
 from src.core.issues import Issue
 
 

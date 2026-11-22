@@ -1,4 +1,7 @@
-"""Shelf packing of part footprints onto printer beds."""
+"""
+Shelf packing of part footprints onto printer beds.
+"""
+
 import math
 from dataclasses import dataclass, field
 from typing import Literal

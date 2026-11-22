@@ -60,7 +60,7 @@ export class Viewer {
   private setupScene(): void {
     const canvas = this.canvas().nativeElement;
     this.renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-    this.renderer.setPixelRatio(window.devicePixelRatio);
+    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
     this.camera.up.set(0, 0, 1);                                
     this.scene.add(new THREE.HemisphereLight(0xffffff, 0x445566, 1.6));

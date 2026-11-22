@@ -1,8 +1,5 @@
-"""Joint features: the geometry an interface adds to the two parts it connects.
-
-Features are built in *site coordinates* (origin on the mating face, +Z out of
-the part) and then moved onto the part with the site's frame. The parent of a
-joint gets the *male* feature, the child gets the *female* one.
+"""
+Joint features: the geometry an interface adds to the two parts it connects.
 """
 from __future__ import annotations
 
@@ -30,8 +27,6 @@ def _union(shapes):
         out = k.fuse(out, s)
     return out
 
-
-# ---------------------------------------------------------------------- male (parent)
 def _pin_boss(p, c):
     k = kernel()
     boss = k.cylinder(p['boss_diameter'] / 2, p['boss_height'] + 0.5, (0, 0, -0.5))
@@ -72,7 +67,6 @@ def _studs(p, c):
     return _union(studs), None
 
 
-# ---------------------------------------------------------------------- female (child)
 def _bore(p, c):
     k = kernel()
     depth = p['pin_length'] + c
@@ -106,9 +100,11 @@ def _sockets(p, c):
              for i in range(nx) for j in range(ny)]
     return None, _union(holes)
 
-
+"""
+Return: (add, cut) in site coordinates for a named feature.
+"""
 def feature_shapes(feature: str, interface, ctx):
-    """Return ``(add, cut)`` in site coordinates for a named feature."""
+
     p = interface.params
     c = ctx.clearance(interface.fit)
     if feature == 'pin_boss':
@@ -156,7 +152,6 @@ def _apply(part, site_name: str, feature: str, interface, ctx) -> None:
 
 
 def apply_interfaces(built: dict, joints: dict, ctx) -> None:
-    """Add the male feature to every joint's parent and the female one to its child."""
     for joint in joints.values():
         if joint.interface is None:
             continue

@@ -56,6 +56,5 @@ def translate(x=0.0, y=0.0, z=0.0) -> np.ndarray:
 
 
 def apply(matrix: np.ndarray, points) -> np.ndarray:
-    """Transform an (N, 3) array of points by a 4x4 matrix."""
     pts = np.asarray(points, dtype=float).reshape(-1, 3)
     return pts @ matrix[:3, :3].T + matrix[:3, 3]
