@@ -1,4 +1,6 @@
-"""A heavy round base plate - the usual root of a turret or arm."""
+"""
+    A heavy round base-plate - the usual root of a turret or arm.
+"""
 from src.core.frames import Frame
 from src.geometry.kernel import kernel
 from src.templates.base import (ALL_INTERFACES, Auto, Body, BuildContext, BuiltPart, Site, Template,

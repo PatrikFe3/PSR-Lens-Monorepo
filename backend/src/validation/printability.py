@@ -1,4 +1,6 @@
-"""Printer-related checks that do not need the plate layout."""
+"""
+    Printer-related checks that do not need the plate layout.
+"""
 from src.core.issues import Issue
 
 

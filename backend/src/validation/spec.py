@@ -1,4 +1,6 @@
-"""Checks on a DesignSpec before any geometry is built."""
+"""
+    Checks on a DesignSpec before any geometry is built.
+"""
 from pydantic import ValidationError
 
 from src.assembly.graph import assembly_tree
@@ -12,7 +14,6 @@ def _err(code, message, part=None, site=None, hint=None, **data) -> Issue:
 def check_spec(spec, catalog, templates) -> list[Issue]:
     issues: list[Issue] = []
 
-    # hardware ------------------------------------------------------------
     hw_ids = [h.id for h in spec.hardware]
     for dup in sorted({i for i in hw_ids if hw_ids.count(i) > 1}):
         issues.append(_err('duplicate_hardware_id', f'Hardware id {dup!r} is used twice.'))
@@ -22,7 +23,6 @@ def check_spec(spec, catalog, templates) -> list[Issue]:
                                hint=f'Choose one of {catalog.hardware.ids()}.'))
     hw_by_id = {h.id: h for h in spec.hardware}
 
-    # parts -----------------------------------------------------------------
     part_ids = [p.id for p in spec.parts]
     if not part_ids:
         issues.append(_err('no_parts', 'The design has no parts.'))
@@ -62,7 +62,6 @@ def check_spec(spec, catalog, templates) -> list[Issue]:
                                    f'Template {template.name!r} cannot hold {ref!r} ({category}).',
                                    part=p.id, hint=f'It holds: {list(template.hardware_categories)}.'))
 
-    # connections -------------------------------------------------------------
     templates_by_part = {p.id: templates.get(p.template) for p in spec.parts}
     used_sites: dict[str, int] = {}
     for c in spec.connections:
@@ -126,7 +125,6 @@ def check_spec(spec, catalog, templates) -> list[Issue]:
             issues.append(_err('site_reused', f'Site {ref!r} is used by {count} connections.',
                                part=ref.split('.', 1)[0], hint='Use one connection per site.'))
 
-    # structure -----------------------------------------------------------------
     if part_ids and not any(i.code in ('unknown_part', 'bad_site_ref') for i in issues):
         _, tree_issues = assembly_tree(spec)
         issues += tree_issues

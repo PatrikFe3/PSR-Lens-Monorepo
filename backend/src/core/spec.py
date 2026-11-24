@@ -1,4 +1,6 @@
-"""The design specification: what the AI (or a user) asks the backend to build."""
+"""
+
+"""
 from typing import Literal
 
 from pydantic import BaseModel, Field

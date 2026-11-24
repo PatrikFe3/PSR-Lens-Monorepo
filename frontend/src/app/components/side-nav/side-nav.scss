@@ -1,9 +1,12 @@
-.example-container {
-    height: 100vh;
+@use 'breakpoints' as bp;
+
+:host {
+    display: block;
+    --psr-topbar-h: 56px;
 }
 
-.matDrawerWrapper {
-    margin: 1rem;
+.example-container {
+    height: 100dvh;
 }
 
 mat-drawer {
@@ -11,7 +14,60 @@ mat-drawer {
     background-color: var(--psr-sidebar);
     color: var(--psr-text);
     border-radius: 0;
+
+    @include bp.phone {
+        width: min(85vw, 280px);
+    }
 }
+
+.shell {
+    height: 100dvh;
+}
+
+.shell__nav {
+    width: 250px;
+    background-color: var(--psr-sidebar);
+    color: var(--psr-text);
+    border-radius: 0;
+
+    @include bp.phone {
+        width: min(85vw, 280px);
+    }
+}
+
+.nav {
+    margin: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.brand {
+    margin: 0 0 .5rem;
+    font: var(--mat-sys-title-large);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.theme {
+    margin-top: auto;
+    align-self: flex-start;
+}
+
+.shell__content {
+    background: var(--psr-gradient);
+    color: var(--psr-text);
+}
+
+mat-nav-list a {
+    color: inherit;
+}
+
+.is-active {
+    background: color-mix(in srgb, var(--psr-primary) 14%, transparent);
+}
+
 
 mat-drawer-content {
     height: 100%;
@@ -19,6 +75,30 @@ mat-drawer-content {
     color: var(--psr-text);
 }
 
-mat-nav-list a {
-    color: inherit;
+.topbar {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    height: var(--psr-topbar-h);
+    gap: .5rem;
+    background: var(--psr-sidebar);
+    color: var(--psr-text);
+}
+
+.topbar__title {
+    font: var(--mat-sys-title-medium);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+.page {
+    display: block;
+    height: 100dvh;
+    overflow: auto;
+
+    @include bp.compact {
+        height: calc(100dvh - var(--psr-topbar-h));
+    }
 }

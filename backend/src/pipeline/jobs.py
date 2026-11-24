@@ -1,4 +1,7 @@
-"""A small in-memory job queue so long builds can run in the background (one at a time)."""
+"""
+A small in-memory job queue so long builds can run in the background
+(one at a time).
+"""
 import threading
 import traceback
 import uuid

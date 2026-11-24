@@ -1,4 +1,6 @@
-"""Collision sweep: move every revolute joint through its range and look for overlaps."""
+"""
+Collision sweep: move every revolute joint through its range and look for overlaps.
+"""
 from itertools import combinations, product
 
 import numpy as np
@@ -11,7 +13,6 @@ TOLERANCE_MM3 = 1.0
 
 
 def sample_poses(joints, samples: int = 5, max_combined: int = 4) -> list[dict[str, float]]:
-    """Each revolute joint alone through its range, plus all range ends combined."""
     revolute = {c: j for c, j in joints.items() if j.kind == 'revolute'}
     if not revolute:
         return [{}]
@@ -32,7 +33,6 @@ def sample_poses(joints, samples: int = 5, max_combined: int = 4) -> list[dict[s
 
 
 def envelope_shape(hw, pose: np.ndarray):
-    """Box around a board plus the space its components need above and below."""
     k = kernel()
     b, e = hw.board, hw.envelope
     height = e.below + b.thickness + e.above

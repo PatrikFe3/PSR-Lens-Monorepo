@@ -1,18 +1,5 @@
-"""Geometry kernel used by the new design pipeline.
+"""
 
-Every solid-modelling call of the new system goes through this module, so
-the rest of the code never imports cadquery directly.
-
-Two backends exist:
-
-* ``cadquery`` - exact B-rep solids (OpenCascade). Use this for real prints.
-* ``preview``  - pure numpy constructive-solid-geometry, sampled on a grid.
-  Volumes, collisions and meshes are approximate (meshes look blocky), but it
-  runs anywhere numpy runs. Used automatically when cadquery is missing, and
-  handy for fast tests.
-
-Select with the ``PSR_KERNEL`` environment variable (``auto`` | ``cadquery`` |
-``preview``) or :func:`set_kernel`.
 """
 from __future__ import annotations
 
@@ -25,7 +12,6 @@ import numpy as np
 Mesh = tuple[np.ndarray, np.ndarray]  # (vertices (N, 3) float, faces (M, 3) int)
 
 
-# --------------------------------------------------------------------------- cadquery
 class CadQueryKernel:
     name = 'cadquery'
     exact = True
@@ -94,10 +80,7 @@ class CadQueryKernel:
         f = np.array(triangles, dtype=np.int64).reshape(-1, 3)
         return v, f
 
-
-# --------------------------------------------------------------------------- preview
 _EPS = 1e-6
-
 
 @dataclass(frozen=True)
 class _Prim:
@@ -149,7 +132,6 @@ class _Node:
 
 
 class PreviewKernel:
-    """Approximate CSG kernel: exact point-membership, grid-sampled measurements."""
     name = 'preview'
     exact = False
 
@@ -220,7 +202,6 @@ class PreviewKernel:
         return np.min([b[0] for b in bs], axis=0), np.max([b[1] for b in bs], axis=0)
 
     def _step(self, lo, hi) -> float:
-        """Grid step: the configured resolution, finer for thin shapes (>= 4 samples across)."""
         thinnest = float(np.min(np.asarray(hi) - np.asarray(lo)))
         return max(min(self.res, thinnest / 4), 0.05)
 
@@ -265,7 +246,6 @@ class PreviewKernel:
         return float(inside.sum() * step ** 3)
 
     def tessellate(self, shape, tolerance=0.1, angular=0.2) -> Mesh:
-        """Voxel surface mesh (blocky) - fine for previews and plate planning."""
         lo, hi = self.bounds(shape)
         lo, hi = lo - self.res, hi + self.res
         axes, pts = self._grid(lo, hi)
@@ -305,13 +285,10 @@ class PreviewKernel:
         faces = np.concatenate([idx[:, [0, 1, 2]], idx[:, [0, 2, 3]]])
         return verts, faces.astype(np.int64)
 
-
-# --------------------------------------------------------------------------- selection
 _active = None
 
 
 def set_kernel(name: str = 'auto'):
-    """Choose the backend: 'auto' (cadquery if installed), 'cadquery' or 'preview'."""
     global _active
     name = (name or 'auto').lower()
     if name in ('auto', 'cadquery'):
@@ -330,7 +307,6 @@ def set_kernel(name: str = 'auto'):
 
 
 def kernel():
-    """The active kernel (selected from PSR_KERNEL on first use)."""
     if _active is None:
         set_kernel(os.getenv('PSR_KERNEL', 'auto'))
     return _active

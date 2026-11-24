@@ -1,10 +1,5 @@
-"""Tests for the new design system. Run from the backend folder:
+"""
 
-    pytest demo_test -o addopts=""        # without coverage
-    pytest demo_test                      # with the coverage report from pytest.ini
-
-Tests marked with the ``any_kernel`` fixture run twice: on the preview kernel and,
-when it is installed, on cadquery.
 """
 import copy
 import json

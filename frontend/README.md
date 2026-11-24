@@ -1,59 +1,64 @@
-# Frontend
+# PSR Print Studio: Frontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.1.8.
+Angular web app for PSR Print Studio. It sends design specs to the backend and shows the
+result in a 3D viewer built with three.js: assembled parts, their joints, and the hardware
+they hold.
 
-## Development server
+**Stack:** Angular 22 (standalone components, signals) · Angular Material · three.js
 
-To start a local development server, run:
+## Run it
+
+The backend must be running first (`uvicorn src.api.app:app --reload` in `backend/`, port 8000).
 
 ```bash
+npm install
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Open http://localhost:4200. During development, `proxy.conf.json` forwards `/designs`,
+`/catalog` and `/health` to the backend on port 8000, so there are no CORS problems and
+no hardcoded backend URLs in the code.
 
-## Code scaffolding
+## Structure
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+| Folder | What it holds |
+|---|---|
+| `src/app/pages/` | Routed screens: `viewer` (3D view), `about`, `settings` |
+| `src/app/components/` | Reusable UI: `side-nav` (app layout, navigation, theme toggle) |
+| `src/app/services/` | `DesignApi` (backend calls, error mapping), `ColorTheme` (light/dark, saved in localStorage) |
+| `src/app/models/` | `design.models.ts`: TypeScript types matching the backend's JSON (spec, manifest, plates) |
+| `src/app/layout/` | `breakpoints.ts`: responsive breakpoints for TypeScript |
+| `src/styles/` | Theme variables and `_breakpoints.scss` |
 
-```bash
-ng generate component component-name
-```
+## How the viewer works
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+1. `DesignApi.build()` sends a `DesignSpec` to `POST /designs`.
+2. The backend returns a **manifest**: every part, its mesh URLs and its 4×4 world matrix.
+3. The viewer loads each part's GLB mesh with `GLTFLoader` and places it with that matrix
+   (row-major in the manifest, transposed for three.js).
+4. `OrbitControls` handles rotate and zoom (mouse and touch).
 
-```bash
-ng generate --help
-```
+The viewer does no geometry itself; the backend computes every position.
 
-## Building
+## Patterns and conventions
 
-To build the project run:
+- **Standalone components + signals:** no NgModules; component state lives in signals.
+- **Services via dependency injection:** components never call `HttpClient` directly.
+- **Error mapping:** `DesignApi` turns HTTP errors into one `DesignFailure` type
+  (422 check issues, 409 questions from the AI, 0 backend not reachable).
+- **Responsive layout:** below 840 px the side nav becomes an overlay (`BreakpointObserver`).
+  Breakpoints are defined twice: keep `_breakpoints.scss` and `layout/breakpoints.ts` in sync.
+  Supported down to 320 px width (WCAG reflow).
+- **Theming:** colours come only from the CSS variables in `src/styles/`, never hardcoded.
+- **Comments:** TSDoc (`/** … */`) on services and public methods.
 
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+## Tests
 
 ```bash
 ng test
 ```
 
-## Running end-to-end tests
+## Status
 
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+The viewer shows the assembled design. Planned next: a build-plate view with STL download,
+opening saved designs by id, and real Settings and New design pages.

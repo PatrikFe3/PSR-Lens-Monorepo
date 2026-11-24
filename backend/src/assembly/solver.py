@@ -32,7 +32,6 @@ class Joint:
 
 
 def build_joints(spec, built, catalog) -> dict[str, Joint]:
-    """One joint per connection, keyed by the child part id."""
     joints = {}
     for c in spec.connections:
         interface = catalog.interfaces.get(c.interface) if c.interface else None
@@ -85,7 +84,6 @@ def _order(built, joints) -> tuple[str, list[str]]:
 
 
 def solve(built: dict, joints: dict[str, Joint], angles: dict[str, float] | None = None) -> Assembly:
-    """Place every part. ``angles`` maps child part id -> joint angle (default: rest angle)."""
     root, order = _order(built, joints)
     angles = dict(angles or {})
     world = {root: np.eye(4)}

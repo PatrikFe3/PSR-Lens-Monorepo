@@ -1,0 +1,11 @@
+$phone-min: 320px;
+$tablet: 600px;
+$desktop: 840px;
+
+$tablet-max: $tablet - 0.02px;
+$desktop-max: $desktop - 0.02px;
+
+@mixin phone   { @media (max-width: $tablet-max)  { @content; } }
+@mixin tablet  { @media (min-width: $tablet) and (max-width: $desktop-max) { @content; } }
+@mixin compact { @media (max-width: $desktop-max) { @content; } }
+@mixin desktop { @media (min-width: $desktop) { @content; } }

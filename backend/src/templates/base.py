@@ -1,9 +1,5 @@
-"""Building blocks shared by all part templates.
-
-A *template* turns a few parameters (most of them ``"auto"``) into solid
-bodies plus named *sites*. A site is a coordinate frame on a face of the
-part: its origin lies on the face and its +Z points out of the part. Two
-parts are joined by mating a site of one with a site of the other.
+"""
+    Building blocks shared by all part templates.
 """
 from __future__ import annotations
 
@@ -19,7 +15,6 @@ from src.core.frames import Frame
 AUTO = 'auto'
 Auto = Literal['auto']
 
-# Every interface in the catalog; templates narrow this per site when needed.
 ALL_INTERFACES = ('revolute_pin', 'screw_m2_5', 'dovetail', 'stud_grid')
 
 
@@ -33,8 +28,8 @@ class Site:
 
 @dataclass
 class Body:
-    shape: Any                     # kernel shape (cadquery Shape or preview CSG node)
-    print_down: str | None = None  # face that goes on the bed: '-Z', '+Z', '+X', ...
+    shape: Any
+    print_down: str | None = None
 
 
 @dataclass
@@ -44,9 +39,7 @@ class BuiltPart:
     params: BaseModel
     bodies: dict[str, Body]
     sites: dict[str, Site]
-    # (hardware use id, 4x4 pose of the hardware's board frame in part coordinates)
     holds: list[tuple[str, np.ndarray]] = field(default_factory=list)
-    # warnings found while building (e.g. a joint feature forced a new print orientation)
     notes: list = field(default_factory=list)
 
 
@@ -58,7 +51,6 @@ class BuildContext:
     hardware: dict[str, Any]  # hardware use id -> HardwareSpec
 
     def clearance(self, fit: str) -> float:
-        """Radial clearance for a fit class, scaled for the material."""
         return self.printer.fit_classes[fit] * self.material.clearance_factor
 
     def pilot_diameter(self, screw: str, fallback: float) -> float:
@@ -77,9 +69,9 @@ class Template(ABC):
     name: ClassVar[str]
     description: ClassVar[str]
     Params: ClassVar[type[TemplateParams]]
-    sites: ClassVar[dict[str, tuple[str, ...]]]           # site name -> accepted interface ids
-    hardware_categories: ClassVar[tuple[str, ...]] = ()   # categories the 'hardware' param accepts
-    needs_assembly: ClassVar[bool] = False                # True: sizes depend on the solved assembly
+    sites: ClassVar[dict[str, tuple[str, ...]]]
+    hardware_categories: ClassVar[tuple[str, ...]] = ()
+    needs_assembly: ClassVar[bool] = False
 
     @property
     def site_names(self) -> list[str]:
@@ -88,8 +80,8 @@ class Template(ABC):
     def parse(self, params: dict) -> TemplateParams:
         return self.Params.model_validate(params or {})
 
+
     def resolve(self, params: TemplateParams, ctx: BuildContext, assembly=None) -> TemplateParams:
-        """Replace every ``"auto"`` by a concrete value. Default: nothing to resolve."""
         return params
 
     @abstractmethod

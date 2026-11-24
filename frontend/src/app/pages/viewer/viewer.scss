@@ -1,0 +1,23 @@
+:host { display: block; height: 100%; }
+
+.viewer-page {
+  position: relative; height: 100%;
+  background: var(--psr-gradient);
+  container-type: inline-size;
+}
+
+.status {
+  position: absolute; top: .75rem; left: 1rem; right: 1rem;
+  color: var(--psr-text);              
+  font: var(--mat-sys-body-medium);
+  pointer-events: none;
+}
+
+@container (max-width: 480px) {
+  .status { top: .5rem; left: .5rem; font: var(--mat-sys-body-small); }
+}
+
+canvas {
+  display: block; width: 100%; height: 100%;
+  touch-action: none;
+}

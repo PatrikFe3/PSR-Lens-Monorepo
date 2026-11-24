@@ -17,7 +17,6 @@ class Board(CatalogModel):
 
 
 class Envelope(CatalogModel):
-    """Space taken by components above the board top and below the board bottom."""
     above: float = Field(gt=0)
     below: float = Field(gt=0)
 
@@ -30,7 +29,6 @@ class Mounting(CatalogModel):
 
 
 class Port(CatalogModel):
-    """``center`` is (position along the face, height above the board top)."""
     id: str
     face: Face
     center: tuple[float, float]

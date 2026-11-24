@@ -1,6 +1,5 @@
-"""File writers for the new pipeline: binary STL (printing) and GLB (web viewer).
+"""
 
-Both are written with numpy only, so no trimesh is needed for export.
 """
 import json
 import struct
@@ -37,7 +36,6 @@ def _pad(data: bytes, fill: bytes) -> bytes:
 
 
 def write_glb(mesh: TriMesh, path) -> Path:
-    """Minimal glTF 2.0 binary: one mesh, positions + indices (units: mm, Z up)."""
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
     positions = mesh.vertices.astype('<f4')
@@ -76,7 +74,6 @@ def write_glb(mesh: TriMesh, path) -> Path:
 
 
 def read_glb(path) -> TriMesh:
-    """Read back a GLB written by :func:`write_glb` (used by tests and the demo)."""
     data = Path(path).read_bytes()
     magic, version, total = struct.unpack_from('<4sII', data, 0)
     if magic != b'glTF' or version != 2 or total != len(data):

@@ -1,19 +1,5 @@
-"""Walk-through of the new design pipeline.
+"""
 
-Run from the backend folder:
-
-    python demo_test/run_demo.py                 # uses cadquery if installed, else the preview kernel
-    python demo_test/run_demo.py --kernel preview
-    python demo_test/run_demo.py --ollama "a raspberry pi case with a camera on a turning arm"
-
-What it shows, step by step:
-  1. the catalog (hardware, interfaces, printers, materials) and the part templates
-  2. a valid design: Raspberry Pi case + turning arm + camera bracket, checked and built
-     into GLB meshes (web viewer), STL build plates (printer) and a manifest
-  3. a design that fails the checks (it would tip over) and the issues it reports
-  4. the AI loop with a scripted "fake" LLM: bad answer -> issues fed back -> fixed answer
-  5. optionally the same loop with your local Ollama model
-All files go to demo_test/output/.
 """
 import argparse
 import copy
@@ -51,7 +37,6 @@ TURRET = {
     'questions': [],
 }
 
-# Same idea on a small pedestal with a 220 mm arm: the centre of mass leaves the base.
 TOP_HEAVY = {
     'intent': 'Camera on a very long arm on a small base',
     'hardware': [{'id': 'cam', 'ref': 'rpi_camera_module_3'}],
@@ -73,9 +58,8 @@ TOP_HEAVY = {
 def title(text):
     print('\n' + '=' * 78 + f'\n{text}\n' + '=' * 78)
 
-
+"""Stands in for Ollama: answers with prepared JSON, one answer per call."""
 class ScriptedLLM:
-    """Stands in for Ollama: answers with prepared JSON, one answer per call."""
 
     def __init__(self, answers):
         self.answers, self.prompts = list(answers), []
@@ -84,14 +68,12 @@ class ScriptedLLM:
         self.prompts.append(prompt)
         return json.dumps(self.answers.pop(0))
 
-
 def show_issues(issues, indent='   '):
     for i in issues:
         where = f' [{i.part}]' if i.part else ''
         print(f'{indent}{i.severity.upper():7} {i.code}{where}: {i.message}')
         if i.hint:
             print(f'{indent}        hint: {i.hint}')
-
 
 def step_catalog(service):
     title('1. Catalog and templates')
@@ -101,7 +83,6 @@ def step_catalog(service):
     for t in service.templates.values():
         params = ', '.join(t.Params.model_fields)
         print(f'   template {t.name:13} sites={t.site_names}  params=({params})')
-
 
 def step_build(service):
     title('2. Build a valid design: Pi case + turning arm + camera bracket')
@@ -133,7 +114,6 @@ def step_build(service):
         print(f'     {key:16} {Path(path).relative_to(BACKEND)}')
     return result
 
-
 def step_failure(service):
     title('3. A design that fails the checks (top-heavy arm)')
     try:
@@ -142,7 +122,6 @@ def step_failure(service):
     except DesignError as err:
         print(f'   rejected with {len(err.issues)} issue(s):')
         show_issues(err.issues)
-
 
 def step_ai_scripted(service):
     title('4. AI loop with a scripted LLM (no Ollama needed)')
@@ -161,7 +140,6 @@ def step_ai_scripted(service):
     print(f'   assumptions: {spec.assumptions}')
     service.output_dir = OUTPUT
 
-
 def step_ai_ollama(service, request):
     title('5. AI loop with your local Ollama model')
     from src.ai.orchestrator import NeedsInput
@@ -177,9 +155,7 @@ def step_ai_ollama(service, request):
     except OllamaConnectionError as err:
         print(f'   {err}')
 
-
 def render(result, path):
-    """Optional picture of the assembly (needs matplotlib)."""
     try:
         import matplotlib
         matplotlib.use('Agg')
@@ -211,7 +187,6 @@ def render(result, path):
     fig.savefig(path, dpi=90)
     return path
 
-
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument('--kernel', default='auto', choices=['auto', 'cadquery', 'preview'])
@@ -237,7 +212,6 @@ def main():
     if picture:
         print(f'   picture: {picture}')
     print('   open the plate STL files in PrusaSlicer / Cura; the .glb files in any glTF viewer.')
-
 
 if __name__ == '__main__':
     main()

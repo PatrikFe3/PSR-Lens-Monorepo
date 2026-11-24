@@ -1,4 +1,6 @@
-"""A tiny triangle-mesh type (numpy only) used for orientation, plate packing and export."""
+"""
+
+"""
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -19,7 +21,6 @@ class TriMesh:
         return TriMesh(self.vertices.copy(), self.faces.copy())
 
     def apply_transform(self, matrix: np.ndarray) -> 'TriMesh':
-        """Transform in place and return self (same convention as trimesh)."""
         m = np.asarray(matrix, dtype=float)
         self.vertices = self.vertices @ m[:3, :3].T + m[:3, 3]
         if np.linalg.det(m[:3, :3]) < 0:  # mirrored: keep normals pointing outwards

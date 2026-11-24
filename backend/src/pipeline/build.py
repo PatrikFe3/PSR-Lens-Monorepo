@@ -49,9 +49,11 @@ def _stages() -> list[Stage]:
         Stage('physics', lambda **s: check_stability(s['built'], s['joints'], s['hardware'], s['material'])),
     ]
 
-
+"""
+Build the parts in memory and run every check. 
+Returns: (built, joints, hardware, issues).
+"""
 def validate_design(spec, catalog, templates, printer, material):
-    """Build the parts in memory and run every check. Returns (built, joints, hardware, issues)."""
     issues = check_spec(spec, catalog, templates)
     if has_errors(issues):
         raise DesignError(issues)

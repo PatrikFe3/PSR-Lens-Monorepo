@@ -1,4 +1,6 @@
-"""A LEGO-sized block. Join bricks with the ``stud_grid`` interface."""
+"""
+    A LEGO-sized block. Join bricks with the 'stud_grid' interface.
+"""
 from src.core.frames import Frame
 from src.geometry.kernel import kernel
 from src.templates.base import Auto, Body, BuildContext, BuiltPart, Site, Template, TemplateParams, auto
